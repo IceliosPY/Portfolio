@@ -1,0 +1,457 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+main {
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* Grille projets compacte */
+#projets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Cartes simples et efficaces */
+.projet {
+    background-color: white;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 45%;
+    min-width: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* Animation */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.projet:nth-child(even) {
+    animation-delay: 0.1s;
+}
+.projet:nth-child(odd) {
+    animation-delay: 0.2s;
+}
+
+.projet:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.projet h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.projet p {
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.projet a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.projet a:hover {
+    text-decoration: underline;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----- Navigation ----- */
+html {
+    scroll-behavior: smooth;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav li a {
+    position: relative;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #222;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav li a:hover {
+    background-color: #007bff20;
+    color: #007bff;
+}
+
+nav li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #007bff;
+    transition: width 0.3s ease;
+}
+
+nav li a:hover::after {
+    width: 100%;
+}
+
+
+/* ----- Social links ----- */
+.socials {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.socials a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    text-decoration: underline;
+}
+
+
+
+#skills-section {
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+#skills-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.skill {
+    width: 280px;
+    height: 180px;
+    background-color: white;
+    border: 2px solid black;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    animation: fadeIn 0.4s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.skill h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #007bff;
+}
+
+.skill p {
+    margin: 6px 0;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.skill ul {
+    padding-left: 16px;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.skill li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.skill li a:hover {
+    text-decoration: underline;
+}
+
+/* ----- SECTION DOCUMENTS STYLE ----- */
+#documents {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.doc-title {
+    font-size: 2em;
+    background: linear-gradient(90deg, #7db2ff, #9df);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.doc-sub {
+    color: #4a84cc;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.doc-box {
+    display: inline-block;
+    border: 2px solid #333;
+    padding: 30px 40px;
+    border-radius: 8px;
+    background-color: #fff; /* fond clair */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.doc-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-box li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.doc-box a {
+    color: #2f6fd9;
+    font-size: 1.1em;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.doc-desc {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.4;
+}
+
+
+/* ===== HERO BLOCK ===== */
+.hero-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+.hero-content {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+/* Titre avec un léger gradient */
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #7f5af0, #00bcd4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Ligne GitHub */
+.hero-github {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-github img {
+    width: 28px;
+    height: 28px;
+}
+
+.hero-github a {
+    color: #007bff;
+    text-decoration: none;
+    border-bottom: 2px solid #007bff;
+}
+
+.hero-github a:hover {
+    color: #0056b3;
+    border-color: #0056b3;
+}
+
+.hero-social-text {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* Réutilise ton style pour la classe .socials */
+.socials {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.socials li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.socials a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    text-decoration: underline;
+}
+@keyframes slideInX {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #7f5af0, #00bcd4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation */
+    animation: slideInX 3s ease 1;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+
+    /* Dégradé animé */
+    background: linear-gradient(270deg, #7f5af0, #00bcd4, #7f5af0);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: waveGradient 6s ease infinite;
+}
+
+@keyframes waveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.footer-links li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.footer-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
