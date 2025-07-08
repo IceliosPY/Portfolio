@@ -6,38 +6,60 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Effets visuels -->
+<div id="rain-container"></div>
+<audio id="rain-audio" src="Audio/pluie.mp3" loop preload="auto"></audio>
+<div id="lightning-flash"></div>
+<audio id="thunder-sound" src="Audio/Thunder.mp3" preload="auto"></audio>
 
     <!-- Menu -->
     <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#documents">Documents</a></li>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li class="dropdown rain-control">
+        <button class="more-btn" aria-label="Plus">⋯</button>
+        <ul class="dropdown-content">
+            <li><button id="toggleTheme">🌓 Auto</button></li>
+            <li><button id="toggleRain" class="menu-toggle">🌧️ Pluie</button></li>
         </ul>
-    </nav>
+    </li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</nav>
 
-    <!-- Section Home -->
+<!-- Section Home -->
 <section id="home" class="hero-block">
     <div class="hero-content">
         <h1 class="hero-title">Enzo Castetbon</h1>
-
-        <p class="hero-github">
-            <img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
-                alt="GitHub logo"
-            />
-            <a href="https://github.com/IceliosPY" target="_blank">@IceliosPY</a>
-        </p>
-
         <p class="hero-social-text">Retrouvez-moi aussi sur :</p>
         <ul class="socials">
-            <li><a href="https://linkedin.com/in/tonprofil" target="_blank">LinkedIn</a></li>
-            <li><a href="mailto:tonmail@example.com">Email</a></li>
-        </ul>
+    <li>
+        <a href="https://github.com/IceliosPY" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+            GitHub
+        </a>
+    </li>
+    <li>
+        <a href="https://linkedin.com/in/tonprofil" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" />
+            LinkedIn
+        </a>
+    </li>
+    <li>
+        <a href="mailto:tonmail@example.com">
+            <img src="https://cdn.jsdelivr.net/gh/feathericons/feather/icons/mail.svg" alt="Email" />
+            Email
+        </a>
+    </li>
+</ul>
     </div>
 </section>
-
 
     <!-- Section Projects -->
     <main id="projects">
@@ -157,30 +179,31 @@
             <p><strong>Expérience :</strong> <span class="experience" data-start="2025-05-15"></span></p>
             <p><strong>Projets en lien :</strong></p>
             <ul>
-                <li><a href="#">Réalisation statistique de reussite</a></li>
+                <li><a href="#">Réalisation de Script FOMOD de traduction pour Skyrim et Fallout 4</a></li>
             </ul>
         </div>
     </div>
 </section>
 
 
-    <!-- Section Documents -->
-    <section id="documents">
+   <!-- Section Documents -->
+   <section id="documents">
+  <div class="doc-wrapper">
     <h2>Documents</h2>
-
     <div class="doc-box">
-        <ul>
-            <li>
-                <a href="Progc.pdf" target="_blank">Modding FKSE/SKSE</a>
-                <span class="doc-desc">Le modding pour FKSE,SKSE<br>(in french)</span>
-            </li>
-        </ul>
+      <ul>
+        <li>
+          <a href="Progc.pdf" target="_blank">Modding FKSE/SKSE</a>
+          <span class="doc-desc">Le modding pour FKSE,SKSE<br>(in french)</span>
+        </li>
+      </ul>
     </div>
+  </div>
 </section>
 
 <footer>
     <div class="footer-container">
-        <p>&copy; 2025 Icelios • Tous droits réservés</p>
+    <p>&copy; <span id="year"></span> Icelios • Tous droits réservés</p>
         <ul class="footer-links">
             <li><a href="mailto:tonmail@example.com">Email</a></li>
             <li><a href="https://github.com/IceliosPY" target="_blank">GitHub</a></li>
@@ -189,7 +212,12 @@
         </ul>
     </div>
 </footer>
-
-    <script src="script.js"></script>
+    <div id="sunset-layer"></div>
+    <div id="sunrise-layer"></div>
+    <div id="sky-elements">
+    <div id="moon"></div>
+    </div>
+         <div id="mini-lightnings"></div>
+         <script src="script.js"></script>
 </body>
 </html>
