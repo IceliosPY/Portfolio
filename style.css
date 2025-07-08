@@ -1,109 +1,117 @@
+/* --------- BASE --------- */
+* {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
+    transition: background-color 0.6s ease, color 0.6s ease;
     margin: 0;
     padding: 0;
+    color: #222;
 }
 
-header {
-    background-color: #222;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
-
-main {
-    padding: 30px;
-    max-width: 1000px;
-    margin: auto;
-}
-
-h2 {
-    color: #333;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-/* Grille projets compacte */
-#projets {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-/* Cartes simples et efficaces */
-.projet {
-    background-color: white;
-    border-left: 4px solid #007bff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    flex: 1 1 45%;
-    min-width: 280px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    /* Animation */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 0.4s ease forwards;
-}
-
-.projet:nth-child(even) {
-    animation-delay: 0.1s;
-}
-.projet:nth-child(odd) {
-    animation-delay: 0.2s;
-}
-
-.projet:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-}
-
-.projet h3 {
-    margin-top: 0;
-    color: #007bff;
-}
-
-.projet p {
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.projet a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.projet a:hover {
-    text-decoration: underline;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ----- Navigation ----- */
 html {
     scroll-behavior: smooth;
 }
 
+/* --------- HEADER / HERO --------- */
+.hero-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+.hero-content {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    background: linear-gradient(270deg, #7f5af0, #00bcd4, #7f5af0);
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+        slideInX 3s ease 1,
+        waveGradient 6s ease infinite;
+}
+
+.hero-github img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+@keyframes slideInX {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes waveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.socials a {
+    font-family: inherit; /* hérite la typo globale */
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.socials a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+body.dark .socials a {
+    color: #1abc9c;
+}
+
+body.dark .socials a:hover {
+    color: #48e1c1;
+}
+
+.socials img {
+    width: 20px;
+    height: 20px;
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+body.dark .socials img {
+    filter: invert(100%) brightness(200%) contrast(150%);
+}
+/* --------- NAVIGATION --------- */
 nav {
     position: sticky;
     top: 0;
     z-index: 1000;
     background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
@@ -111,14 +119,18 @@ nav {
 nav ul {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 15px 0;
+    align-items: center;
+    padding: 15px 20px;
     margin: 0;
     list-style: none;
+    gap: 30px;
 }
 
-nav li a {
+nav li {
     position: relative;
+}
+
+nav a {
     font-weight: 600;
     font-size: 1rem;
     color: #222;
@@ -128,12 +140,12 @@ nav li a {
     transition: all 0.3s ease;
 }
 
-nav li a:hover {
+nav a:hover {
     background-color: #007bff20;
     color: #007bff;
 }
 
-nav li a::after {
+nav a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -144,36 +156,102 @@ nav li a::after {
     transition: width 0.3s ease;
 }
 
-nav li a:hover::after {
+nav a:hover::after {
     width: 100%;
 }
 
-
-/* ----- Social links ----- */
-.socials {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
+/* Toggle theme button */
+.theme-toggle {
+    margin-left: auto;
 }
 
-.socials li {
-    display: inline-block;
-    margin: 0 10px;
+#toggleTheme {
+    
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #222;
+    transition: transform 0.3s ease;
 }
 
-.socials a {
+#toggleTheme:hover {
+    transform: scale(1.2);
+}
+
+/* --------- PROJETS --------- */
+main {
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#projets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.projet {
+    background-color: white;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 45%;
+    min-width: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.projet:nth-child(even) { animation-delay: 0.1s; }
+.projet:nth-child(odd) { animation-delay: 0.2s; }
+
+.projet:hover {
+    transform: scale(1.02) translateY(-4px) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.dark .projet:hover {
+    transform: scale(1.02) translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* un poil plus fort */
+}
+
+.projet h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.projet p {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.projet a {
     color: #007bff;
     text-decoration: none;
+    font-weight: bold;
 }
 
-.socials a:hover {
+.projet a:hover {
     text-decoration: underline;
 }
 
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-
+/* --------- SKILLS --------- */
 #skills-section {
-    padding: 30px;
     max-width: 1000px;
     margin: auto;
 }
@@ -197,11 +275,9 @@ nav li a:hover::after {
     border: 2px solid black;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     animation: fadeIn 0.4s ease forwards;
     opacity: 0;
     transform: translateY(10px);
@@ -213,30 +289,15 @@ nav li a:hover::after {
     color: #007bff;
 }
 
-.skill p {
-    margin: 6px 0;
+.skill p, .skill ul {
     font-size: 0.9em;
     color: #333;
+    margin: 6px 0;
+    padding: 0 0 0 16px;
 }
 
-.skill ul {
-    padding-left: 16px;
-    margin: 0;
-    font-size: 0.9em;
-}
-
-.skill li a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.skill li a:hover {
-    text-decoration: underline;
-}
-
-/* ----- SECTION DOCUMENTS STYLE ----- */
+/* --------- DOCUMENTS --------- */
 #documents {
-    padding: 60px 20px;
     text-align: center;
 }
 
@@ -245,7 +306,6 @@ nav li a:hover::after {
     background: linear-gradient(90deg, #7db2ff, #9df);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
 }
 
 .doc-sub {
@@ -259,7 +319,7 @@ nav li a:hover::after {
     border: 2px solid #333;
     padding: 30px 40px;
     border-radius: 8px;
-    background-color: #fff; /* fond clair */
+    background-color: #fff;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     text-align: left;
 }
@@ -290,78 +350,14 @@ nav li a:hover::after {
     line-height: 1.4;
 }
 
-
-/* ===== HERO BLOCK ===== */
-.hero-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px;
-}
-
-.hero-content {
-    background-color: #fff;
-    border: 2px solid #ddd;
-    padding: 40px 30px;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-}
-
-/* Titre avec un léger gradient */
-.hero-title {
-    font-size: 2.8rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    background: linear-gradient(90deg, #7f5af0, #00bcd4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Ligne GitHub */
-.hero-github {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.hero-github img {
-    width: 28px;
-    height: 28px;
-}
-
-.hero-github a {
-    color: #007bff;
-    text-decoration: none;
-    border-bottom: 2px solid #007bff;
-}
-
-.hero-github a:hover {
-    color: #0056b3;
-    border-color: #0056b3;
-}
-
-.hero-social-text {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #444;
-}
-
-/* Réutilise ton style pour la classe .socials */
+/* --------- SOCIALS --------- */
 .socials {
     padding: 0;
     margin: 0;
     list-style: none;
-}
-
-.socials li {
-    display: inline-block;
-    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .socials a {
@@ -372,61 +368,16 @@ nav li a:hover::after {
 .socials a:hover {
     text-decoration: underline;
 }
-@keyframes slideInX {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
-.hero-title {
-    font-size: 2.8rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    background: linear-gradient(90deg, #7f5af0, #00bcd4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    /* Animation */
-    animation: slideInX 3s ease 1;
-}
-
-.hero-title {
-    font-size: 2.8rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-
-    /* Dégradé animé */
-    background: linear-gradient(270deg, #7f5af0, #00bcd4, #7f5af0);
-    background-size: 600% 600%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    animation: waveGradient 6s ease infinite;
-}
-
-@keyframes waveGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
+/* --------- FOOTER --------- */
 footer {
     background-color: #222;
     color: #fff;
     padding: 20px 0;
     text-align: center;
     margin-top: 40px;
+    font-size: 0.9em;
+    line-height: 1.6; /* Assure une hauteur régulière */
 }
 
 .footer-container {
@@ -449,9 +400,371 @@ footer {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.9em;
 }
 
 .footer-links a:hover {
     text-decoration: underline;
 }
+
+/* -------- DARK MODE FOOTER -------- */
+body.dark footer {
+    background-color: #151618;
+    color: #aaa;
+}
+
+body.dark .footer-links a {
+    color: #1abc9c;
+}
+
+/* --------- DARK MODE --------- */
+body.dark {
+    background-color: #101214;
+    color: #f0f0f0;
+}
+
+/* Blocs principaux */
+body.dark .projet,
+body.dark .skill,
+body.dark .hero-content,
+body.dark .doc-box {
+    background-color: #1a1d21;
+    color: #f0f0f0;
+    border-color: #3498db;
+}
+
+body.dark #skills-section,
+body.dark #documents {
+    background-color: transparent;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Texte secondaire */
+body.dark .projet p,
+body.dark .skill p,
+body.dark .doc-desc {
+    color: #c0c0c0;
+}
+
+/* Titres & liens */
+body.dark h1, 
+body.dark h2,
+body.dark h3,
+body.dark .projet h3,
+body.dark a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+body.dark a:hover {
+    color: #48e1c1;
+    text-decoration: underline;
+}
+
+/* Navigation */
+body.dark nav {
+    background-color: rgba(26, 28, 32, 0.9);
+    border-bottom: 1px solid #2e2e2e;
+}
+
+body.dark nav li a {
+    color: #1abc9c;
+}
+
+body.dark nav li a:hover {
+    background-color: #2d2f33;
+    color: #4dabf7;
+}
+
+/* Bouton dark mode */
+body.dark #toggleTheme {
+    color: #f1c40f;
+}
+
+/* Footer */
+body.dark footer {
+    background-color: #151618;
+    color: #aaa;
+}
+
+/* GitHub logo */
+body.dark .hero-github img {
+    filter: brightness(0) invert(1); /* meilleure visibilité */
+}
+.hero-github img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 6px;
+    transition: transform 0.2s ease;
+}
+
+.hero-github a:hover img {
+    transform: scale(1.2);
+}
+body.dark .hero-github img {
+    filter: invert(100%) brightness(200%) contrast(150%);
+}
+/* .doc-box apparence */
+body.dark .doc-box {
+    background-color: #1a1d21 !important;
+    border: 2px solid #3498db;
+    color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    padding: 30px 40px;
+}
+/* Wrapper pour la section Documents */
+.documents-wrapper {
+    background-color: white;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Dark mode */
+body.dark .documents-wrapper {
+    background-color: #1a1d21;
+    border-color: #3498db;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+#rain-container{
+    position:fixed;
+    top:0;left:0;
+    width:100vw;height:100vh;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+  }
+  .raindrop {
+    border-radius: 50px;
+    animation: fall linear infinite;
+    transform: scale(1.2);
+    position: absolute;
+    top: -30px;
+}
+
+  @keyframes fall{
+    to{
+      transform:translateY(100vh);
+      opacity:0;
+    }
+  }
+  body.dark .raindrop{background:rgba(255,255,255,.2);}
+  body:not(.dark) .raindrop {
+    background: rgba(0, 0, 100, 0.3);
+    box-shadow: 0 0 3px rgba(0, 0, 100, 0.4);
+}
+  .rain-control {
+    position: relative;
+  }
+
+  #toggleRain {
+    transition: transform 0.3s ease;
+}
+
+#toggleRain:hover {
+    transform: scale(1.2);
+}
+
+  .more-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 999;
+    border-radius: 4px;
+    padding: 5px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    min-width: 180px; /* par exemple, au lieu de 120px */
+}
+  
+.dropdown-content li {
+    padding: 4px 10px; /* pour aérer un peu */
+}
+  
+  .dropdown-content button {
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 6px 12px;
+    text-align: left;
+    cursor: pointer;
+    color: #333;
+    font-size: 0.9rem; /* Ajoute cette ligne */
+}
+  
+  .dropdown-content button:hover {
+    background-color: #f0f0f0;
+  }
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  
+    width: 100%;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  .menu-toggle:hover {
+    background-color: #f0f0f0;
+  }
+  
+  body.dark .menu-toggle:hover {
+    background-color: #2d2f33;
+  }
+
+  .rain-control:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Dark mode */
+  body.dark .dropdown-content {
+    background-color: #1a1d21;
+    border-color: #2e2e2e;
+  }
+  
+  body.dark .dropdown-content button {
+    color: #f0f0f0;
+  }
+  
+  body.dark .dropdown-content button:hover {
+    background-color: #2d2f33;
+  }
+
+ /* --------- ÉCLAIR (flash plein-écran) --------- */
+#lightning-flash{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:#fff;
+    opacity:0;
+    z-index:2;                 /* au-dessus de la pluie (z-index:1) */
+    transition:opacity .15s ease-out;
+}
+
+/* Blanc un peu moins vif en dark-mode pour ne pas aveugler */
+body.dark #lightning-flash{
+    background:#e6e6e6;
+}
+
+#mini-lightnings {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3; /* au-dessus de la pluie */
+  }
+  
+  .mini-lightning {
+    position: fixed;
+    width: 3px;
+    height: 60px;
+    background: white;
+    z-index: 3;
+    opacity: 0;
+    animation: flash-mini 0.4s ease-out forwards;
+    pointer-events: none;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.5);
+}
+  
+body.dark .mini-lightning {
+    background: #e6e6e6;
+    box-shadow: 0 0 10px 4px rgba(230,230,230,0.6);
+}
+  
+  @keyframes flash-mini {
+    0%   { opacity: 0; transform: scaleY(0.5); }
+    30%  { opacity: 1; transform: scaleY(1.2); }
+    100% { opacity: 0; transform: scaleY(0.8); }
+}
+/* Container des éléments du ciel */
+#sky-elements {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  #moon {
+    position: absolute;
+    top: 15%;
+    right: 8%;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #fff;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1;
+  }
+  
+ /* ---------- Étoiles ---------- */
+.star{
+    position:absolute;
+    border-radius:50%;
+    background:#fff;
+    transition: opacity .8s;
+    opacity:0;                      /* départ invisible */
+    animation:fadeStar 3s forwards; /* fondu d’apparition */
+  }
+  
+  @keyframes fadeStar{
+    0%   {opacity:0; transform:scale(.4);}
+    60%  {opacity:1; transform:scale(1.2);}
+    100% {opacity:1; transform:scale(1);}
+  }
+  
+  /* Version dark-mode ⇒ couleur un peu plus douce */
+  body.dark .star{background:#e6e6e6;}
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(1.3); }
+  }
+  
+  /* Affichage conditionnel */
+  body.dark.night #moon,
+  body.dark.night .star {
+    opacity: 1;
+  }
+  
+  body.night #moon,
+  body.night .star {
+    opacity: 1;
+  }
+  body:not(.night) #moon,
+  body:not(.night) .star {
+    display: none;
+  }
+/* Le ciel (dégradé de fond) se fera en fondu grâce à cette transition : */
+body::before{
+    transition: background 2s ease, filter 1.2s ease;
+  }
+  
+  body.night::before{
+    filter: brightness(.9) saturate(.9); /* un effet très léger */
+  }
