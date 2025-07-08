@@ -212,8 +212,7 @@
         </ul>
     </div>
 </footer>
-    <div id="sunset-layer"></div>
-    <div id="sunrise-layer"></div>
+    
     <div id="sky-elements">
     <div id="moon"></div>
     </div>

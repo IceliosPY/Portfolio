@@ -11,10 +11,12 @@ fetch("pinned.php")
   .then(r => r.json())
   .then(repos => {
       const container = document.getElementById("projets");
-      container.innerHTML = "";
+      container.innerHTML = "";                      // nettoie l’ancien contenu
+
       repos.forEach(repo => {
-          const lang  = repo.primaryLanguage ? repo.primaryLanguage.name : null;
-          const card  = document.createElement("div");
+          const lang = repo.primaryLanguage ? repo.primaryLanguage.name : null;
+
+          const card = document.createElement("div");
           card.className = "projet";
           card.innerHTML = `
               <h3>${getIcon(lang)} ${repo.name}</h3>
@@ -26,10 +28,43 @@ fetch("pinned.php")
       });
   })
   .catch(err => {
-      console.error("Erreur pinned.php :", err);
+      console.error("Erreur lors du chargement des projets :", err);
       document.getElementById("projets").textContent =
         "Impossible de charger les projets épinglés.";
   });
+
+  document.querySelectorAll('.experience').forEach(span => {
+    const startDate = new Date(span.dataset.start);
+    const now = new Date();
+
+    let years  = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth()  - startDate.getMonth();
+    const days =  now.getDate()  - startDate.getDate();
+
+    // Ajuste si on n’a pas encore atteint le jour du mois
+    if (days < 0) {
+        months--;
+    }
+    // Ajuste si on n’a pas encore atteint le mois anniversaire
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    // Construit le texte : ex. "1 an 3 mois", "8 mois", "2 ans"
+    let txt = '';
+    if (years > 0) {
+        txt += `${years} an${years > 1 ? 's' : ''}`;
+    }
+    if (months > 0) {
+        if (txt) txt += ' ';
+        txt += `${months} mois`;
+    }
+    if (!txt) txt = '0 mois';          // au cas où la date est aujourd’hui
+
+    span.textContent = txt;
+});
+
 
 /* ---------- 3. Calcul d’expérience ---------- */
 document.querySelectorAll('.experience').forEach(span => {
@@ -43,8 +78,10 @@ document.querySelectorAll('.experience').forEach(span => {
 
     const txtYears  = years  ? `${years} an${years > 1 ? 's' : ''}` : '';
     const txtMonths = months ? `${months} mois`                      : '';
+
     span.textContent = [txtYears, txtMonths].filter(Boolean).join(' ') || '0 mois';
 });
+
 
 /* ---------- 4. Année automatique footer ---------- */
 const yearSpan = document.getElementById('year');
@@ -64,6 +101,12 @@ if (cnilLink) {
 document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("toggleTheme");
     if (!btn) return;
+    const fadeOutStars = () => {
+        // ① on lance le fondu
+        sky.querySelectorAll('.star').forEach(star => star.style.opacity = 0);
+        // ② on nettoie le DOM après l’animation (~900 ms)
+        setTimeout(() => (sky.innerHTML = ""), 900);
+      };
   
     const THEMES = ["light", "dark"];
     let currentTheme = "auto"; // toujours auto au début
@@ -120,18 +163,22 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
   
     layers.forEach(layer => {
-      for (let i = 0; i < layer.count; i++) {
-        const d = document.createElement("div");
-        d.className = "raindrop";
-        d.style.left             = `${Math.random() * 100}vw`;
-        d.style.width            = `${layer.size}px`;
-        d.style.height           = `${layer.size * 6}px`;
-        d.style.opacity          = layer.opacity;
-        d.style.animationDuration= `${layer.speed + Math.random()}s`;
-        d.style.animationDelay   = `${Math.random() * 4}s`;
-        container.appendChild(d);
-      }
-    });
+        for (let i = 0; i < layer.count; i++) {
+          const d = document.createElement("div");
+          d.className = "raindrop";
+      
+          d.style.left   = `${Math.random() * 100}vw`;
+          d.style.width  = `${layer.size}px`;
+          d.style.height = `${layer.size * 6}px`;
+      
+          d.style.opacity          = layer.opacity;
+          d.style.animationDuration= `${layer.speed + Math.random()}s`;
+          d.style.animationDelay   = `${Math.random() * 4}s`;
+      
+          container.appendChild(d);
+        }
+      });
+      
   
     /* --------- son très discret --------- */
     if (audio) {
@@ -205,8 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (miniLayer) {
         const mini = document.createElement("div");
         mini.className   = "mini-lightning";
-        mini.style.left  = `${Math.random() * 100}vw`;
-        mini.style.top   = `${Math.random() * 80}vh`; // 0–80 % de la hauteur
+        mini.style.left = `${Math.random() * 100}vw`;
+        mini.style.top  = `${Math.random() * 80}vh`;
         miniLayer.appendChild(mini);
         setTimeout(() => mini.remove(), 400);         // nettoyage
       }
@@ -235,12 +282,12 @@ document.addEventListener("DOMContentLoaded", () => {
     /* -------- si la pluie est active au chargement -------- */
     if (rainActive) startFlashes();
   });
-  
+
   document.addEventListener("DOMContentLoaded", () => {
     /* ---------------------------------
        1)  RÉGLAGE DE TEST (22 h simulé)
        --------------------------------- */
-    const overrideHour = 22;        // ←  mets null pour revenir à l’heure réelle
+    const overrideHour = null;        // ←  mets null pour revenir à l’heure réelle
     /* --------------------------------- */
   
     const btn = document.getElementById("toggleTheme");
@@ -299,4 +346,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+  
   

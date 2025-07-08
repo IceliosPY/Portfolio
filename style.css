@@ -768,3 +768,39 @@ body::before{
   body.night::before{
     filter: brightness(.9) saturate(.9); /* un effet très léger */
   }
+
+
+
+  
+  /* -------------------------------------------------
+   Calque sunrise (seulement pour la transition NUIT → JOUR)
+   -------------------------------------------------*/
+#sunrise-layer{
+    position:fixed; inset:0; z-index:-2;            /* au-dessus de ton ciel normal */
+    pointer-events:none;
+    opacity:0;                                      /* caché en temps normal        */
+    background:radial-gradient( circle at 50% 100%,
+               #ffcc73  0%,   /* soleil orangé au ras de l'horizon  */
+               #ff9966 25%,
+               #ff6673 55%,
+               rgba(255,102,115,0) 80% );
+  }
+  
+  /* animation de 1,8 s : apparition puis disparition douce */
+  @keyframes sunriseFade{
+    0%   {opacity:0}
+    25%  {opacity:.95}
+    80%  {opacity:.8}
+    100% {opacity:0}
+  }
+  
+  /* -------------------------------------------------
+     Étoiles : fade-out en même temps que le lever du soleil
+     -------------------------------------------------*/
+  .star{
+    transition:opacity .9s ease;
+  }
+  
+  body.sunrise .star{           /* quand on déclenche la transition */
+    opacity:0;
+  }
