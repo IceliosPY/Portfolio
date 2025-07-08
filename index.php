@@ -19,6 +19,7 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#documents">Documents</a></li>
+    <li><a href="projet.php">Autres projets</a></li>
     <li class="dropdown rain-control">
         <button class="more-btn" aria-label="Plus">⋯</button>
         <ul class="dropdown-content">
@@ -65,9 +66,6 @@
     <main id="projects">
         <h2>Mes projets GitHub</h2>
         <div id="projets"></div>
-        <p class="more-projects">
-            👉 <a href="projects.html">Voir plus de projets</a>
-        </p>
     </main>
 
 <!-- Section Skills -->

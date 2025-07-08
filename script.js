@@ -284,67 +284,81 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-    /* ---------------------------------
-       1)  RÉGLAGE DE TEST (22 h simulé)
-       --------------------------------- */
-    const overrideHour = null;        // ←  mets null pour revenir à l’heure réelle
-    /* --------------------------------- */
-  
     const btn = document.getElementById("toggleTheme");
     const sky = document.getElementById("sky-elements");
     if (!btn || !sky) return;
   
-    let currentMode = "";
+    // ⏰ Permet un test forcé (null = réel)
+       /* ---------------------------------
+       1)  RÉGLAGE DE TEST 
+       --------------------------------- */
+       const overrideHour = null;       
+       /* --------------------------------- */
+
+       
+    const getHour = () => overrideHour ?? new Date().getHours();
   
+    // 🌌 Étoiles
     const addStars = () => {
       sky.innerHTML = "";
       for (let i = 0; i < 100; i++) {
-        const s  = document.createElement("div");
+        const s = document.createElement("div");
         const sz = Math.random() * 1.5 + 1;
-        s.className  = "star";
-        s.style.width  = s.style.height = `${sz}px`;
-        s.style.top  = `${Math.random() * 100}vh`;
+        s.className = "star";
+        s.style.width = s.style.height = `${sz}px`;
+        s.style.top = `${Math.random() * 100}vh`;
         s.style.left = `${Math.random() * 100}vw`;
         sky.appendChild(s);
       }
     };
+    const clearStars = () => (sky.innerHTML = "");
   
+    // 🎨 Appliquer le thème
     const applyTheme = (mode) => {
       document.body.classList.remove("dark", "night");
-      sky.innerHTML = "";
-      currentMode = mode;
+      clearStars();
+      currentTheme = mode;
   
       if (mode === "light") {
         btn.textContent = "🌙 Mode sombre";
       } else if (mode === "dark") {
         document.body.classList.add("dark");
-        btn.textContent = "☀️ Mode Clair";
+        btn.textContent = "☀️ Mode clair";
       } else if (mode === "night") {
         document.body.classList.add("dark", "night");
         addStars();
-        btn.textContent = "☀️ Mode Clair";
+        btn.textContent = "☀️ Mode clair";
       }
     };
   
-    /* ----------- heure courante (réelle ou simulée) ----------- */
-    const getHour = () => overrideHour ?? new Date().getHours();
+    // 🧠 Détection reload complet → on oublie le choix précédent
+    const nav = performance.getEntriesByType("navigation")[0];
+    const isReload = nav && nav.type === "reload";
+    if (isReload) sessionStorage.removeItem("forcedTheme");
   
-    /* ----------- état initial ----------- */
-    const h = getHour();
-    if (h >= 6 && h < 20)        applyTheme("light");
-    else if (h >= 20 && h < 22)  applyTheme("dark");
-    else                         applyTheme("night");
+    // 🕒 Thème automatique selon l'heure
+    const autoTheme = () => {
+      const h = getHour();
+      if (h >= 6 && h < 20) return "light";
+      if (h >= 20 && h < 22) return "dark";
+      return "night";
+    };
   
-    /* ----------- clic sur le bouton ----------- */
+    // 📦 Chargement initial
+    let currentTheme = sessionStorage.getItem("forcedTheme") || autoTheme();
+    applyTheme(currentTheme);
+  
+    // 🖱️ Clic utilisateur : alterne entre light ↔ dark/night
     btn.addEventListener("click", () => {
-      if (currentMode === "light") {
-        const now = getHour();
-        if (now >= 22 || now < 6) applyTheme("night");
-        else                      applyTheme("dark");
+      const h = getHour();
+      let next;
+      if (currentTheme === "light") {
+        next = h >= 22 || h < 6 ? "night" : "dark";
       } else {
-        applyTheme("light");
+        next = "light";
       }
+      sessionStorage.setItem("forcedTheme", next);
+      applyTheme(next);
     });
   });
-  
   

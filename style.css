@@ -267,7 +267,37 @@ body.dark .projet:hover {
     justify-content: center;
     gap: 20px;
 }
-
+#skills a {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+  }
+  
+  /* Mode clair : couleur par défaut */
+  body:not(.dark) #skills a {
+    color: #0a84ff; /* bleu (modifiable) */
+  }
+  
+  body:not(.dark) #skills a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  /* 🌙 Mode sombre : vert */
+  body.dark #skills a {
+    color: #1abc9c; /* vert clair agréable sur fond sombre */
+  }
+  
+  body.dark #skills a:hover {
+    color: #b8ffb8;
+    text-decoration: underline;
+    transform: scale(1.05);
+  }
+  #skills a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+    transform: scale(1.05);
+  }
 .skill {
     width: 280px;
     height: 180px;
