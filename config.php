@@ -1,2 +1,2 @@
 <?php
-define('GH_TOKEN', 'VOTRE_GITHUB');
+define('GH_TOKEN', 'YOUR_TOKEN');
